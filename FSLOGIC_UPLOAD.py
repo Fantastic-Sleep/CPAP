@@ -225,10 +225,24 @@ if col2.button("Generate PDF Report"):
     
     ])
     el=[]
-    logo=os.path.join(os.path.dirname(__file__),"SFlogo.png")
-    if os.path.isfile(logo):
-        with open(logo,"rb") as f:
-            el.append(Image(io.BytesIO(f.read()),width=420,height=60))
+    logo_filename = "SFlogo.PNG"
+    # either relative to this script:
+        
+    logo_path = os.path.join(os.path.dirname(__file__), logo_filename)
+        # or simpler, relative to the app’s cwd:
+        # logo_path = os.path.join(os.getcwd(), logo_filename)
+
+    st.write("Logo path:", logo_path, "Exists?", os.path.isfile(logo_path))
+
+    if os.path.isfile(logo_path):
+        with open(logo_path, "rb") as f:
+            elements.append(Image(io.BytesIO(f.read()), width=420, height=60))
+    else:
+        st.error(f"⚠️ Could not find {logo_filename} at {logo_path}")
+##    logo=os.path.join(os.path.dirname(__file__),"SFlogo.png")
+##    if os.path.isfile(logo):
+##        with open(logo,"rb") as f:
+##            el.append(Image(io.BytesIO(f.read()),width=420,height=60))
     el.append(Spacer(1,6))
     el.append(Paragraph(f"Patient Name: _______________________   DOB: __________      Date: {date.today():%m/%d/%Y}",styles['Heading4']))
     el.append(Spacer(1,6))
