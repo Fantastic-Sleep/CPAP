@@ -236,7 +236,7 @@ if col2.button("Generate PDF Report"):
 
     if os.path.isfile(logo_path):
         with open(logo_path, "rb") as f:
-            elements.append(Image(io.BytesIO(f.read()), width=420, height=60))
+            el.append(Image(io.BytesIO(f.read()), width=420, height=60))
     else:
         st.error(f"⚠️ Could not find {logo_filename} at {logo_path}")
 ##    logo=os.path.join(os.path.dirname(__file__),"SFlogo.png")
